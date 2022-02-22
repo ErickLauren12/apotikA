@@ -20,5 +20,13 @@ class CategorySeeder extends Seeder
         DB::table('categories')->insert([
             'category_name' => "ANALGESIK NON NARKOTIK"
         ]);
+
+        DB::table('categories')->insert([
+            'category_name' => "ANTIPIRAI"
+        ]);
+
+        DB::table('categories')->insert([
+            'category_name' => "NYERI NEUROPATIK"
+        ]);
     }
 }

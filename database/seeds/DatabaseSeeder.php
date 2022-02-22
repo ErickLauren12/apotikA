@@ -1,7 +1,5 @@
 <?php
 
-use ProductSeeder;
-use CategorySeeder;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -15,5 +13,6 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(CategorySeeder::class);
         $this->call(ProductSeeder::class);
+        $this->call(MedicineSeeder::class);
     }
 }
