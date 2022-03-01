@@ -12,107 +12,203 @@ class MedicineSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('medicines')->insert([
-            'name' => "oksikodon",
-            'formula' => "60 kaps/bulan",
-            'description' => "Untuk nyeri berat yang
-            memerlukan terapi opioid jangka
-            panjang, around-the-clock, Tidak untuk terapi as needed
-            (prn), Pasien tidak memiliki gangguan
-            respirasi",
-            'faskes_1' => 0,
-            'faskes_2' => 1,
-            'faskes_3' => 1,
-            'price' => 10000,
-            'category_id' => 1,
+        
+        DB::table('medicines')->insert(
+            ['generic_name' => 'asam mefenamat',
+             'form' => 'kaps 250 mg',
+             'restriction_formula' =>'30 kaps/bulan.',
+             'price' => 10000,
+             'description' =>'',
+             'faskes1' => '1',
+             'faskes2' => '1',
+             'faskes3' => '1',
+             'category_id'=>1
+        ]);
+        DB::table('medicines')->insert(
+            ['generic_name' => 'asam mefenamat',
+             'form' => 'tab 500 mg',
+             'restriction_formula' =>'30 tab/bulan.',
+             'price' => 12000,
+             'description' =>'',
+             'faskes1' => '1',
+             'faskes2' => '1',
+             'faskes3' => '1',
+             'category_id'=>1
+        ]);
+        DB::table('medicines')->insert(
+            ['generic_name' => 'ibuprofen',
+             'form' => 'tab 200 mg',
+             'restriction_formula' =>'30 tab/bulan.',
+             'price' => 8000,
+             'description' =>'',
+             'faskes1' => '1',
+             'faskes2' => '1',
+             'faskes3' => '1',
+             'category_id'=>1
+        ]);
+        DB::table('medicines')->insert(
+            ['generic_name' => 'ibuprofen',
+             'form' => 'tab 400 mg',
+             'restriction_formula' =>'30 tab/bulan.',
+             'price' => 9500,
+             'description' =>'',
+             'faskes1' => '1',
+             'faskes2' => '1',
+             'faskes3' => '1',
+             'category_id'=>1
+        ]);
+        DB::table('medicines')->insert(
+            ['generic_name' => 'asam mefenamat',
+             'form' => ' susp 100 mg/5 mL',
+             'restriction_formula' =>'1 btl/kasus.',
+             'price' => 15000,
+             'description' =>'',
+             'faskes1' => '1',
+             'faskes2' => '1',
+             'faskes3' => '1',
+             'category_id'=>1
+        ]);
+        DB::table('medicines')->insert(
+            ['generic_name' => 'ketoprofen',
+             'form' => ' inj 50 mg/mL',
+             'restriction_formula' =>'',
+             'price' => 22000,
+             'description' =>'Untuk nyeri sedang sampai berat pada pasien yang tidak',
+             'faskes1' => '1',
+             'faskes2' => '1',
+             'faskes3' => '1',
+             'category_id'=>1
+        ]);
+        DB::table('medicines')->insert(
+            ['generic_name' => 'ketoprofen',
+             'form' => 'sup 100 mg',
+             'restriction_formula' =>'2 sup/hari, maks 3 hari.',
+             'price' => 25000,
+             'description' =>'Untuk nyeri sedang sampai berat pada pasien yang tidak',
+             'faskes1' => '1',
+             'faskes2' => '1',
+             'faskes3' => '1',
+             'category_id'=>1
         ]);
 
-        DB::table('medicines')->insert([
-            'name' => "petidin",
-            'formula' => "2 amp/hari",
-            'description' => "Hanya untuk nyeri sedang
-            hingga berat pada pasien
-            yang dirawat di Rumah
-            Sakit, Tidak digunakan untuk nyeri
-            kanker",
-            'faskes_1' => 0,
-            'faskes_2' => 1,
-            'faskes_3' => 1,
-            'price' => 20000,
-            'category_id' => 1,
+        //kategori 2
+        DB::table('medicines')->insert(
+            ['generic_name' => 'alopurinol',
+             'form' => 'tab 100 mg',
+             'restriction_formula' =>'30tab/bulan',
+             'price' => 17500,
+             'description' =>'Tidak diberikan pada saat nyeri akut',
+             'faskes1' => '1',
+             'faskes2' => '1',
+             'faskes3' => '1',
+             'category_id'=>2
+        ]);
+        DB::table('medicines')->insert(
+            ['generic_name' => 'alopurinol',
+             'form' => 'tab 300 mg',
+             'restriction_formula' =>'30tab/bulan',
+             'price' => 17500,
+             'description' =>'Tidak diberikan pada saat nyeri akut',
+             'faskes1' => '1',
+             'faskes2' => '1',
+             'faskes3' => '1',
+             'category_id'=>2
+        ]);
+        DB::table('medicines')->insert(
+            ['generic_name' => 'kolkisin',
+             'form' => 'tab 500 mcg',
+             'restriction_formula' =>'30tab/bulan',
+             'price' => 16500,
+             'description' =>'Tidak diberikan pada saat nyeri akut',
+             'faskes1' => '1',
+             'faskes2' => '1',
+             'faskes3' => '1',
+             'category_id'=>2
         ]);
 
-        DB::table('medicines')->insert([
-            'name' => "ketoprofen",
-            'formula' => "2 sup/hari, maks 3
-            hari",
-            'description' => "Untuk nyeri sedang sampai
-            berat pada pasien yang tidak",
-            'faskes_1' => 0,
-            'faskes_2' => 1,
-            'faskes_3' => 1,
-            'price' => 10000,
-            'category_id' => 2,
+
+        //kategori 3
+        DB::table('medicines')->insert(
+            ['generic_name' => 'bupivakain',
+             'form' => 'inj 0,5%',
+             'restriction_formula' =>'',
+             'price' => 12250,
+             'description' =>'',
+             'faskes1' => '0',
+             'faskes2' => '1',
+             'faskes3' => '1',
+             'category_id'=>3
+        ]);
+        DB::table('medicines')->insert(
+            ['generic_name' => 'lidokain',
+             'form' => 'inj 0,5%',
+             'restriction_formula' =>'',
+             'price' => 12250,
+             'description' =>'',
+             'faskes1' => '1',
+             'faskes2' => '1',
+             'faskes3' => '1',
+             'category_id'=>3
+        ]);
+        DB::table('medicines')->insert(
+            ['generic_name' => 'lidokain',
+             'form' => 'spray topikal 10%',
+             'restriction_formula' =>'',
+             'price' => 12250,
+             'description' =>'',
+             'faskes1' => '1',
+             'faskes2' => '1',
+             'faskes3' => '1',
+             'category_id'=>3
         ]);
 
-        DB::table('medicines')->insert([
-            'name' => "ketorolak",
-            'formula' => "2-3 amp/hari,
-            maks 2 hari",
-            'description' => "Untuk nyeri sedang sampai
-            berat pada pasien yang tidak
-            dapat menggunakan analgesik
-            secara oral",
-            'faskes_1' => 0,
-            'faskes_2' => 1,
-            'faskes_3' => 1,
-            'price' => 5000,
-            'category_id' => 2,
+        //kategori 4
+        DB::table('medicines')->insert(
+            ['generic_name' => 'propranolol',
+             'form' => 'tab 10 mg',
+             'restriction_formula' =>'',
+             'price' => 25250,
+             'description' =>'',
+             'faskes1' => '1',
+             'faskes2' => '1',
+             'faskes3' => '1',
+             'category_id'=>4
         ]);
 
-        DB::table('medicines')->insert([
-            'name' => "alopurinol",
-            'formula' => "30 tab/bulan",
-            'description' => "Tidak diberikan pada saat nyeri akut",
-            'faskes_1' => 1,
-            'faskes_2' => 1,
-            'faskes_3' => 1,
-            'price' => 15000,
-            'category_id' => 3,
+        //kategori 5
+        DB::table('medicines')->insert(
+            ['generic_name' => 'betahistin',
+             'form' => 'tab 6 mg',
+             'restriction_formula' =>'Untuk vertigo perifer:
+                - BPPV: 1 minggu.
+                - non BPPV: 30 
+                tab/bulan',
+             'price' => 25250,
+             'description' =>'Hanya untuk sindrom 
+             meniere atau vertigo perifer.  Untuk sindrom meniere atau
+             vertigo non BPPV hanya di 
+             Faskes Tk. 2 dan 3',
+             'faskes1' => '1',
+             'faskes2' => '1',
+             'faskes3' => '1',
+             'category_id'=>5
         ]);
 
-        DB::table('medicines')->insert([
-            'name' => "kolkisin",
-            'formula' => "30 tab/bulan",
-            'description' => "tab 500 mcg",
-            'faskes_1' => 1,
-            'faskes_2' => 1,
-            'faskes_3' => 1,
-            'price' => 10000,
-            'category_id' => 3,
+        DB::table('medicines')->insert(
+            ['generic_name' => 'betahistin',
+             'form' => 'tab 24 mg',
+             'restriction_formula' =>'90 tab/bulan.n',
+             'price' => 35000,
+             'description' =>'Hanya untuk sindrom 
+             meniere atau vertigo perifer.  Untuk sindrom meniere atau
+             vertigo non BPPV hanya di 
+             Faskes Tk. 2 dan 3. Hanya untuk sindrom meniere',
+             'faskes1' => '0',
+             'faskes2' => '1',
+             'faskes3' => '1',
+             'category_id'=>5
         ]);
 
-        DB::table('medicines')->insert([
-            'name' => "gabapentin",
-            'formula' => "30 tab/bulan",
-            'description' => "Hanya untuk neuralgia pascaherpes
-            atau nyeri neuropati diabetikum",
-            'faskes_1' => 1,
-            'faskes_2' => 1,
-            'faskes_3' => 1,
-            'price' => 10000,
-            'category_id' => 4,
-        ]);
 
-        DB::table('medicines')->insert([
-            'name' => "karbamazepin",
-            'formula' => "60 tab/bulan",
-            'description' => "Hanya untuk neuralgia trigeminal",
-            'faskes_1' => 1,
-            'faskes_2' => 1,
-            'faskes_3' => 1,
-            'price' => 12000,
-            'category_id' => 4,
-        ]);
     }
 }
