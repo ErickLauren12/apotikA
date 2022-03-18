@@ -28,6 +28,51 @@ class MedicineController extends Controller
         ]);
     }
 
+    public function coba1(){
+
+        //Filter
+        /*
+        $result = DB::table('medicines')->where('price','>','20000')->get();
+        return view('medicine.index',[
+            'result'=>$result
+        ]);
+
+        //agregate . jumlah row
+        $result=DB::table('medicines')->count(); // result = 16
+
+        //max
+        $result=DB::table('medicines')->max('price');
+
+        //filter
+        $result=DB::table('medicines')->where('price','<','20000')->count();
+
+        //Join
+        $result=DB::table('medicines')->join('categories','medicines.category_id','=','categories.id')->get();
+
+
+        //sorting
+        $result=DB::table('medicines')->orderBy('price','desc')->get();
+
+        //join, order
+        $result=DB::table('medicines')->join('categories','medicines.category_id','=','categories.id')->orderBy('price','desc')->get();
+        
+        //take
+        $result=DB::table('medicines')->join('categories','medicines.category_id','=','categories.id')->orderBy('price','desc')->take(9)->get();
+        
+
+        //mendapatkan 1 id
+        $result = Medicine::find(3);
+        */
+
+        $result=Medicine::all();
+
+        return view('medicine.index',[
+            'result'=>$result
+        ]);
+
+        
+    } 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -57,7 +102,8 @@ class MedicineController extends Controller
      */
     public function show(Medicine $medicine)
     {
-        //
+        $data = $medicine;
+        return view('medicine.show', compact('data'));
     }
 
     /**

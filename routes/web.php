@@ -20,3 +20,12 @@ Route::get('/', function () {
 Route::resource('/medicines','MedicineController');
 
 Route::resource('/category','CategoryController');
+
+Route::get('/medicines/{medicine}','MedicineController@show');
+
+Route::get('/coba1','MedicineController@coba1');
+
+Route::get('/data','DataController@show');
+Route::get('/report/listmedicine/{id}','CategoryController@showlist');
+
+Route::get('/report/highestPrice','DataController@highestPrice');

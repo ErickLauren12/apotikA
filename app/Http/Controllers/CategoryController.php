@@ -85,4 +85,17 @@ class CategoryController extends Controller
     {
         //
     }
+
+    public function showlist($id_category){
+        $data = Category::find($id_category);
+        $nameCategory = $data->name;
+        $result = $data->medicines;
+        if($result){
+            $getTotalData = $result->count();
+        }else{
+            $getTotalData = 0;
+        }
+
+        return view('report.list_medicines_by_category',compact('id_category','nameCategory','result','getTotalData'));
+    }
 }
