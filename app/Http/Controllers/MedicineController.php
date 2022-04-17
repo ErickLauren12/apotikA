@@ -28,6 +28,14 @@ class MedicineController extends Controller
         ]);
     }
 
+    public function showInfo(){
+        $result = Medicine::orderBy('price','desc')->first();
+        return response()->json(array(
+            'status'=>'oke',
+            'msg'=>"<div class='alert alert-info'>Did you know? <br>This message is sent by a Controller.' Obat dengan harga termahal bernama".$result->generic_name.", Dengan harga ".$result->price."</div>"
+        ),200);
+    }
+
     public function coba1(){
 
         //Filter
@@ -104,6 +112,12 @@ class MedicineController extends Controller
     {
         $data = $medicine;
         return view('medicine.show', compact('data'));
+    }
+
+    public function show2(Medicine $medicine)
+    {
+        $data = $medicine;
+        return view('medicine.show_detail', compact('data'));
     }
 
     /**

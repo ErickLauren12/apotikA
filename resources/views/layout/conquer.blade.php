@@ -42,6 +42,10 @@ License: You must have a valid license purchased only from themeforest(the above
 <link rel="shortcut icon" href="{{ asset('favicon.ico') }}"/>
 </head>
 <!-- END HEAD -->
+
+@yield('javascript')
+
+
 <!-- BEGIN BODY -->
 <body class="page-header-fixed">
 <!-- BEGIN HEADER -->
@@ -494,6 +498,12 @@ License: You must have a valid license purchased only from themeforest(the above
 				<a href="{{ url('/medicines') }}">
 				<i class="fa fa-bar-chart-o"></i>
 				<span class="title">Report</span>
+				</a>
+			</li>
+            <li class="start ">
+				<a href="{{ route('transaction.index') }}">
+				<i class="fa fa-bar-chart-o"></i>
+				<span class="title">Transaction</span>
 				</a>
 			</li>
 		</ul>
