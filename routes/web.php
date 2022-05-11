@@ -1,5 +1,6 @@
 <?php
 
+use App\Supplier;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,8 +22,11 @@ Route::resource('/medicines','MedicineController');
 
 Route::resource('/category','CategoryController');
 
+Route::get('/medicines','MedicineController@index')->name("medicine.index");
 Route::get('/medicines/{medicine}','MedicineController@show');
 Route::get('/medicines2/{medicine}','MedicineController@show2')->name('medicines2.show');
+Route::get('/medicines/create','MedicineController@create')->name('medicines.create');
+Route::post('/medicines','MedicineController@store');
 
 Route::get('/coba1','MedicineController@coba1');
 
@@ -37,3 +41,9 @@ Route::resource('transaction','TransactionController');
 
 Route::post('transaction/showDataAjax/','TransactionController@showAjax')->name('transaction.showAjax');
 Route::get('transaction/showDataAjax2/{id}','TransactionController@showAjax2')->name('transaction.showAjax2');
+
+Route::resource("supplier","SupplierController");
+Route::get("supplier/create","SupplierController@create");
+Route::put("supplier/{supplier}/edit","SupplierController@edit");
+Route::put("supplier/{supplier}","SupplierController@update");
+Route::delete("supplier/{supplier}","SupplierController@destroy");

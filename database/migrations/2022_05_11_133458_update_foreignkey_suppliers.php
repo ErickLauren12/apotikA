@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateForeignkeyMedicines extends Migration
+class UpdateForeignkeySuppliers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class UpdateForeignkeyMedicines extends Migration
      */
     public function up()
     {
-        Schema::table('medicines', function (Blueprint $table) {
+        Schema::table('suppliers', function (Blueprint $table) {
             $table->foreign('category_id')->references('id')->on('categories');
         });
     }
@@ -25,7 +25,7 @@ class UpdateForeignkeyMedicines extends Migration
      */
     public function down()
     {
-        Schema::table('medicines', function (Blueprint $table) {
+        Schema::table('suppliers', function (Blueprint $table) {
             $table->dropForeign(['category_id']);
         });
     }

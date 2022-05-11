@@ -34,8 +34,7 @@
   <tr>
       <td>Foto</td>
       <td>
-        <img src="{{ asset('images/'.$data->image) }}"
-          />
+        <img src="{{ asset('storage/'.$data->image) }}" height='500px' width="500px"/>
       </td>
     </tr>
   </tbody>

@@ -11,6 +11,10 @@ class Medicine extends Model
     }
 
     public function transactions(){
-        return $this->belongsTo('App\Transaction','medicine_transaction','medicine_id','transaction_id')->withPivot('quantity','price');
+        return $this->belongsToMany('App\Transaction','medicine_transaction','medicine_id','transaction_id')->withPivot('quantity','price');
+    }
+
+    public function suppliers(){
+        return $this->belongsTo('App\Supplier','supplier_id');
     }
 }

@@ -22,7 +22,8 @@ class MedicineSeeder extends Seeder
              'faskes1' => '1',
              'faskes2' => '1',
              'faskes3' => '1',
-             'category_id'=>1
+             'category_id'=>1,
+             'supplier_id' => 1
         ]);
         DB::table('medicines')->insert(
             ['generic_name' => 'asam mefenamat',
@@ -33,7 +34,8 @@ class MedicineSeeder extends Seeder
              'faskes1' => '1',
              'faskes2' => '1',
              'faskes3' => '1',
-             'category_id'=>1
+             'category_id'=>1,
+             'supplier_id' => 2
         ]);
         DB::table('medicines')->insert(
             ['generic_name' => 'ibuprofen',
@@ -44,7 +46,8 @@ class MedicineSeeder extends Seeder
              'faskes1' => '1',
              'faskes2' => '1',
              'faskes3' => '1',
-             'category_id'=>1
+             'category_id'=>1,
+             'supplier_id' => 1
         ]);
         DB::table('medicines')->insert(
             ['generic_name' => 'ibuprofen',
@@ -55,7 +58,8 @@ class MedicineSeeder extends Seeder
              'faskes1' => '1',
              'faskes2' => '1',
              'faskes3' => '1',
-             'category_id'=>1
+             'category_id'=>1,
+             'supplier_id' => 1
         ]);
         DB::table('medicines')->insert(
             ['generic_name' => 'asam mefenamat',
@@ -66,7 +70,8 @@ class MedicineSeeder extends Seeder
              'faskes1' => '1',
              'faskes2' => '1',
              'faskes3' => '1',
-             'category_id'=>1
+             'category_id'=>1,
+             'supplier_id' => 2
         ]);
         DB::table('medicines')->insert(
             ['generic_name' => 'ketoprofen',
@@ -77,7 +82,8 @@ class MedicineSeeder extends Seeder
              'faskes1' => '1',
              'faskes2' => '1',
              'faskes3' => '1',
-             'category_id'=>1
+             'category_id'=>1,
+             'supplier_id' => 1
         ]);
         DB::table('medicines')->insert(
             ['generic_name' => 'ketoprofen',
@@ -88,7 +94,8 @@ class MedicineSeeder extends Seeder
              'faskes1' => '1',
              'faskes2' => '1',
              'faskes3' => '1',
-             'category_id'=>1
+             'category_id'=>1,
+             'supplier_id' => 1
         ]);
 
         //kategori 2
@@ -101,7 +108,8 @@ class MedicineSeeder extends Seeder
              'faskes1' => '1',
              'faskes2' => '1',
              'faskes3' => '1',
-             'category_id'=>2
+             'category_id'=>2,
+             'supplier_id' => 2
         ]);
         DB::table('medicines')->insert(
             ['generic_name' => 'alopurinol',
@@ -112,7 +120,8 @@ class MedicineSeeder extends Seeder
              'faskes1' => '1',
              'faskes2' => '1',
              'faskes3' => '1',
-             'category_id'=>2
+             'category_id'=>2,
+             'supplier_id' => 2
         ]);
         DB::table('medicines')->insert(
             ['generic_name' => 'kolkisin',
@@ -123,7 +132,8 @@ class MedicineSeeder extends Seeder
              'faskes1' => '1',
              'faskes2' => '1',
              'faskes3' => '1',
-             'category_id'=>2
+             'category_id'=>2,
+             'supplier_id' => 1
         ]);
 
 
@@ -137,7 +147,8 @@ class MedicineSeeder extends Seeder
              'faskes1' => '0',
              'faskes2' => '1',
              'faskes3' => '1',
-             'category_id'=>3
+             'category_id'=>3,
+             'supplier_id' => 2
         ]);
         DB::table('medicines')->insert(
             ['generic_name' => 'lidokain',
@@ -148,7 +159,8 @@ class MedicineSeeder extends Seeder
              'faskes1' => '1',
              'faskes2' => '1',
              'faskes3' => '1',
-             'category_id'=>3
+             'category_id'=>3,
+             'supplier_id' => 1
         ]);
         DB::table('medicines')->insert(
             ['generic_name' => 'lidokain',
@@ -159,7 +171,8 @@ class MedicineSeeder extends Seeder
              'faskes1' => '1',
              'faskes2' => '1',
              'faskes3' => '1',
-             'category_id'=>3
+             'category_id'=>3,
+             'supplier_id' => 1
         ]);
 
         //kategori 4
@@ -172,7 +185,8 @@ class MedicineSeeder extends Seeder
              'faskes1' => '1',
              'faskes2' => '1',
              'faskes3' => '1',
-             'category_id'=>4
+             'category_id'=>4,
+             'supplier_id' => 1
         ]);
 
         //kategori 5
@@ -191,7 +205,8 @@ class MedicineSeeder extends Seeder
              'faskes1' => '1',
              'faskes2' => '1',
              'faskes3' => '1',
-             'category_id'=>5
+             'category_id'=>5,
+             'supplier_id' => 2
         ]);
 
         DB::table('medicines')->insert(
@@ -206,9 +221,8 @@ class MedicineSeeder extends Seeder
              'faskes1' => '0',
              'faskes2' => '1',
              'faskes3' => '1',
-             'category_id'=>5
+             'category_id'=>5,
+             'supplier_id' => 1
         ]);
-
-
     }
 }

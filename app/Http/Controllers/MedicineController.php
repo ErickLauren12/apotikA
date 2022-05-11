@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Medicine;
+use App\Supplier;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -88,7 +90,9 @@ class MedicineController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        $suppliers = Supplier::all();
+        return view("medicine.create",["suppliers"=>$suppliers, "categories"=>$categories]);
     }
 
     /**
@@ -99,7 +103,19 @@ class MedicineController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Medicine();
+        $data->generic_name = $request->get("generic_name");
+        $data->form = $request->get("form");
+        $data->restriction_formula = $request->get("restriction_formula");
+        $data->price = $request->get("price");
+        $data->description = $request->get("description");
+        $data->category_id = $request->get("category_id");
+        $data->supplier_id = $request->get("supplier_id");
+        $data->supplier_id = $request->get("supplier_id");
+        $data->image = $request->file('image')->store('ImagesMedicine');
+
+        $data->save();
+        return redirect()->route("medicine.index")->with('status','data medicine baru berhasil tersimpan');
     }
 
     /**

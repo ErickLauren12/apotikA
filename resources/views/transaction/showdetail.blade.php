@@ -1,3 +1,3 @@
 @foreach($medicines as $m)
-    {{ $m->generic_name }} {{ $m->pivot->price }} {{ $m->pivot->quantity }}
+    <p>Name:{{ $m->generic_name }} Price:{{ $m->pivot->price }} Quantity:{{ $m->pivot->quantity }}</p>  
 @endforeach

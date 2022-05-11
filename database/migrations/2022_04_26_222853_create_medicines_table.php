@@ -21,12 +21,12 @@ class CreateMedicinesTable extends Migration
             $table->double('price',12,2);
             $table->text('description')->nullable();
             $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('supplier_id');
             $table->boolean('faskes1')->default(0);
             $table->boolean('faskes2')->default(0);
             $table->boolean('faskes3')->default(0);
- 
-            
             $table->timestamps();
+            $table->string('image');
         });
     }
 
