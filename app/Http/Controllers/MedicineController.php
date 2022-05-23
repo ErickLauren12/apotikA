@@ -25,8 +25,12 @@ class MedicineController extends Controller
 
         //dengan model
         $result = Medicine::all();
+        $DataCategories = Category::all();
+        $suppliers = Supplier::all();
         return view('medicine.index',[
-            'result'=>$result
+            'result'=>$result,
+            'categories'=>$DataCategories,
+            'suppliers' => $suppliers
         ]);
     }
 
@@ -167,6 +171,24 @@ class MedicineController extends Controller
      */
     public function destroy(Medicine $medicine)
     {
-        //
+        $this->authorize('delete-permission',$medicine);
+        try {
+            $medicine->delete();
+            return redirect()->route('medicine.index')->with('status', 'data berhasil dihapus');
+        } catch (\PDOException $e) {
+            $msg = "Data gagal di hapus";
+            return redirect()->route("medicine.index")->with('status',$msg);
+        }
+    }
+
+    public function getEditForm(Request $request){
+        $id = $request->get('id');
+        $data = Medicine::find($id);
+        $categories = Category::all();
+        $suppliers = Supplier::all();
+        return response()->json(array(
+            'status'=>'oke',
+            'msg'=>view('medicine.getEditForm', compact('data'), compact("suppliers", 'categories'))->render()
+        ),200);
     }
 }

@@ -415,9 +415,10 @@ License: You must have a valid license purchased only from themeforest(the above
             <!-- BEGIN USER LOGIN DROPDOWN -->
             <li class="dropdown user">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-                <img alt="" src="assets/img/avatar3_small.jpg"/>
                 <span class="username">
-                Nick </span>
+                    @auth
+                    Welcome, {{ auth()->user()->name }} </span>
+                    @endauth
                 <i class="fa fa-angle-down"></i>
                 </a>
                 <ul class="dropdown-menu">
@@ -440,7 +441,10 @@ License: You must have a valid license purchased only from themeforest(the above
                     <li class="divider">
                     </li>
                     <li>
-                        <a href="login.html"><i class="fa fa-key"></i> Log Out</a>
+                        <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <i class="fa fa-key"></i><input type="submit" name="logout" class="btn btn-danger" value="Logout">
+                    </form>
                     </li>
                 </ul>
             </li>

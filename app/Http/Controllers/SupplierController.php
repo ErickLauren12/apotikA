@@ -50,6 +50,7 @@ class SupplierController extends Controller
 
     public function destroy(Supplier $supplier)
     {
+        $this->authorize('delete-permission',$supplier);
         try {
             $supplier->delete();
             return redirect()->route('supplier.index')->with('status', 'data berhasil dihapus');
@@ -57,5 +58,58 @@ class SupplierController extends Controller
             $msg = "Data gagal di hapus";
             return redirect()->route("supplier.index")->with('status',$msg);
         }
+    }
+
+    public function getEditForm(Request $request){
+        $id = $request->get('id');
+        $data = Supplier::find($id);
+        $DataCategories = Category::all();
+        return response()->json(array(
+            'status'=>'oke',
+            'msg'=>view('supplier.getEditForm', compact('data'), compact("DataCategories"))->render()
+        ),200);
+    }
+
+    public function getEditForm2(Request $request){
+        $id = $request->get('id');
+        $data = Supplier::find($id);
+        $DataCategories = Category::all();
+        return response()->json(array(
+            'status'=>'oke',
+            'msg'=>view('supplier.getEditForm2', compact('data'), compact("DataCategories"))->render()
+        ),200);
+    }
+
+    public function saveData(Request $request){
+        $id = $request->get('id');
+        $supplier = Supplier::find($id);
+        $supplier->name = $request->get('name');
+        $supplier->address = $request->get('address');
+        $supplier['category_id'] = $request->get('category_id');
+        $supplier->save();
+
+        return response()->json(array(
+            'status'=>'ok',
+            'msg'=>'Supplier Data Updated'
+        ),200);
+    }
+
+    public function deleteData(Request $request){
+        try{
+            $id = $request->get('id');
+            $supplier = Supplier::find($id);
+            $supplier->delete();
+    
+            return response()->json(array(
+                'status'=>'ok',
+                'msg'=>'Supplier Data Deleted'
+            ),200);
+        }catch(\PDOException $e){
+            return response()->json(array(
+                'status'=>'error',
+                'msg'=>'Supplier Data is Not Deleted'
+            ),200);
+        }
+
     }
 }
