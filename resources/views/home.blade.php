@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.frontend')
 
 @section('content')
 <div class="container">
@@ -13,8 +13,34 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    <h1>Riwayat Transaksi</h1>
+                    <table id="nota" class="table table-hover-condensed">
+                        <thead>
+                            <tr>
+                                <th style="width: 10%">Kode</th>
+                                <th style="width: 50%">Waktu Transaksi</th>
+                                <th style="width: 30%" class="text-center">Total</th>
+                                <th style="width: 10%"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($trans as $t)
+                                <tr>
+                                    <td data-th="Kode">
+                                        {{ $t->id }}
+                                    </td>
+                                    <td data-th="Waktu">{{ $t->transaction_date }}</td>
+                                    <td data-th="Total">
+                                        Rp. {{ $t->total }}
+                                    </td>
 
-                    {{ __('You are logged in!') }}
+                                    <td class="actions" data-th="">
+                                        <a class="btn btn-info btn-sm update-cart" href="{{ url('transaction/show/'.$t->id) }}">View</a>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

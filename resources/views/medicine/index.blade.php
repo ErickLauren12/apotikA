@@ -128,11 +128,37 @@
         </thead>
         <tbody>
             @foreach ($result as $item) 
-            <tr>
-                <td>{{ $item['generic_name'] }}</td>
+            <tr id="tr_{{ $item->id }}">
+                <td class="editable" id="td_generic_name_{{ $item['id'] }}">{{ $item['generic_name'] }}</td>
                 <td>{{ $item['form'] }}</td>
                 <td>{{ $item['restriction_formula'] }}</td>
-                <td><a data-toggle="modal" href="#detail_{{ $item->id }}"><img src="{{ asset('storage/'.$item->image) }}" height="100px" width="120px"></a>
+                <td><a data-toggle="modal" href="#detail_{{ $item->id }}"><img src="{{ asset('images/'.$item->image) }}" height="100px" width="120px"></a>
+                    <div class="modal fade" id="modalChange_{{ $item['id'] }}" tabindex="-1" role="basic" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content" >
+                            <form role="form" action="{{ route('medicine.changeImage') }}" method="POST" enctype="multipart/form-data">
+                            <div class="modal-header">
+                              <button type="button" class="close" 
+                                data-dismiss="modal" aria-hidden="true"></button>
+                              <h4 class="modal-title">Change Image</h4>
+                            </div>
+                            <div class="modal-body">
+                                @csrf
+                                <div class="form-group">
+                                    <label>Image</label>
+                                    <input type="file" class="form-control" id="image" name="image">
+                                    <input type="hidden" id="id" name="id" value="{{ $item['id'] }}">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-info">Submit</button>
+                                <a data-dismiss="modal" class="btn btn-default">Cancel</a>
+                            </div>
+                        </form>
+                          </div>
+                        </div>
+                      </div>
+                      <br><a href="#modalChange_{{ $item['id'] }}" data-toggle="modal" class="btn btn-xs btn-default">Change</a>
 
                 <div class="modal fade" id="detail_{{$item->id}}" tabindex="-1" role="basic" aria-hidden="true">
                   <div class="modal-dialog">
@@ -199,5 +225,33 @@
                 }
               });
           }
+</script>
+@endsection
+
+@section('initialscript')
+<script>
+    $(".editable").editable({
+        closeOnEnter: true,
+        callback: function(data){
+            if(data.content){
+                var s_id = data.$el[0].id
+                var fname = s_id.split('_')[1] + "_" +s_id.split('_')[2]              
+                var id = s_id.split('_')[3]
+                
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route("medicine.saveDataField") }}',
+                    data:{'_token':'<?php echo csrf_token()?>',
+                    'id':id,
+                    'fname':fname,
+                    'value':data.content
+                },
+                success: function(data){
+                    alert(data.msg)
+                }
+                });
+            }
+        }
+    });
 </script>
 @endsection

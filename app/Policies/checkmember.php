@@ -6,7 +6,7 @@ use App\User;
 use Illuminate\Auth\Access\Response;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
-class SupplierPolicy
+class checkmember
 {
     use HandlesAuthorization;
 
@@ -20,9 +20,10 @@ class SupplierPolicy
         //
     }
 
-    public function delete(User $user){
-        return($user->sebagai == 'Pemilik'
+    public function checkmember(User $user){
+        return ($user->sebagai == "Member"
             ? Response::allow()
-            : Response::deny('You must be a super admin'));
+            : Response::deny('Anda harus daftar sebagai member'));
+        
     }
 }

@@ -66,6 +66,7 @@
 
                             <div class="col-md-6">
                                 <select name="sebagai" class="form-control">
+                                    <option>Member</option>
                                     <option>Pemilik</option>
                                     <option>Karyawan</option>
                                 </select>

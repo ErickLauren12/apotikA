@@ -15,6 +15,7 @@
             <th scope="col">Name</th>
             <th scope="col">Address</th>
             <th scope="col">Category</th>
+            <th scope="col">Logo</th>
             <th scope="col">
                 <a href="{{ url('supplier/create') }}" class="btn btn-info" type="button">
                     Tambah
@@ -87,14 +88,43 @@
         <tbody>
             @foreach ($result as $item) 
             <tr id="tr_{{ $item['id'] }}">
-                <td id="td_name_{{ $item['id'] }}">{{ $item['name'] }}</td>
-                <td id="td_address_{{ $item['id'] }}">{{ $item['address'] }}</td>
+                <td class="editable" id="td_name_{{ $item['id'] }}">{{ $item['name'] }}</td>
+                <td class="editable" id="td_address_{{ $item['id'] }}">{{ $item['address'] }}</td>
                 <td id="td_category_{{ $item['id'] }}">
                     @foreach ($categories as $itemCat)
                         @if ($itemCat['id'] == $item['category_id'])
                         {{ $itemCat['name'] }}
                         @endif
                     @endforeach
+                </td>
+                <td>
+                    <img width="100px" height="100px" src="{{ asset('images/'.$item['logo']) }}" alt="">
+                    <div class="modal fade" id="modalChange_{{ $item['id'] }}" tabindex="-1" role="basic" aria-hidden="true">
+                        <div class="modal-dialog">
+                          <div class="modal-content" >
+                            <form role="form" action="{{ route('supplier.changeLogo') }}" method="POST" enctype="multipart/form-data">
+                            <div class="modal-header">
+                              <button type="button" class="close" 
+                                data-dismiss="modal" aria-hidden="true"></button>
+                              <h4 class="modal-title">Change Logo</h4>
+                            </div>
+                            <div class="modal-body">
+                                @csrf
+                                <div class="form-group">
+                                    <label>Logo</label>
+                                    <input type="file" class="form-control" id="logo" name="logo">
+                                    <input type="hidden" id="id" name="id" value="{{ $item['id'] }}">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-info">Submit</button>
+                                <a data-dismiss="modal" class="btn btn-default">Cancel</a>
+                            </div>
+                        </form>
+                          </div>
+                        </div>
+                      </div>
+                      <br><a href="#modalChange_{{ $item['id'] }}" data-toggle="modal" class="btn btn-xs btn-default">Change</a>
                 </td>
                 <td>
                     <a href="{{ url('supplier/'.$item['id']).'/edit' }}" class="btn btn-info">Edit</a>
@@ -199,4 +229,32 @@
               });
           }
       </script>
+@endsection
+
+@section('initialscript')
+<script>
+    $(".editable").editable({
+        closeOnEnter: true,
+        callback: function(data){
+            if(data.content){
+                var s_id = data.$el[0].id
+                var fname = s_id.split('_')[1]
+                var id = s_id.split('_')[2]
+                
+                $.ajax({
+                    type: 'POST',
+                    url: '{{ route("supplier.saveDataField") }}',
+                    data:{'_token':'<?php echo csrf_token()?>',
+                    'id':id,
+                    'fname':fname,
+                    'value':data.content
+                },
+                success: function(data){
+                    alert(data.msg)
+                }
+                });
+            }
+        }
+    });
+</script>
 @endsection

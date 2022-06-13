@@ -15,6 +15,35 @@ class MedicineController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function front_index()
+    {
+        $products = Medicine::all();
+        return view('frontend.product',compact('products'));
+    }
+
+    public function addToChart($id){
+        $p = Medicine::find($id);
+        $cart = session()->get('cart');
+
+        if(!isset($cart[$id])){
+            $cart[$id]=[
+                "name" => $p->generic_name,
+                "quantity" => 1,
+                "price" => $p->price,
+                "photo" => $p->image
+            ];
+        }else{
+            $cart[$id]["quantity"]++;
+        }
+        session()->put('cart',$cart);
+        return redirect()->back()->with('success','Product added to cart successfully!');
+    }
+
+    public function cart(){
+        return view('frontend.cart');
+    }
+
     public function index()
     {
         //dgn raw
@@ -27,22 +56,24 @@ class MedicineController extends Controller
         $result = Medicine::all();
         $DataCategories = Category::all();
         $suppliers = Supplier::all();
-        return view('medicine.index',[
-            'result'=>$result,
-            'categories'=>$DataCategories,
+        return view('medicine.index', [
+            'result' => $result,
+            'categories' => $DataCategories,
             'suppliers' => $suppliers
         ]);
     }
 
-    public function showInfo(){
-        $result = Medicine::orderBy('price','desc')->first();
+    public function showInfo()
+    {
+        $result = Medicine::orderBy('price', 'desc')->first();
         return response()->json(array(
-            'status'=>'oke',
-            'msg'=>"<div class='alert alert-info'>Did you know? <br>This message is sent by a Controller.' Obat dengan harga termahal bernama".$result->generic_name.", Dengan harga ".$result->price."</div>"
-        ),200);
+            'status' => 'oke',
+            'msg' => "<div class='alert alert-info'>Did you know? <br>This message is sent by a Controller.' Obat dengan harga termahal bernama" . $result->generic_name . ", Dengan harga " . $result->price . "</div>"
+        ), 200);
     }
 
-    public function coba1(){
+    public function coba1()
+    {
 
         //Filter
         /*
@@ -78,14 +109,12 @@ class MedicineController extends Controller
         $result = Medicine::find(3);
         */
 
-        $result=Medicine::all();
+        $result = Medicine::all();
 
-        return view('medicine.index',[
-            'result'=>$result
+        return view('medicine.index', [
+            'result' => $result
         ]);
-
-        
-    } 
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -96,7 +125,7 @@ class MedicineController extends Controller
     {
         $categories = Category::all();
         $suppliers = Supplier::all();
-        return view("medicine.create",["suppliers"=>$suppliers, "categories"=>$categories]);
+        return view("medicine.create", ["suppliers" => $suppliers, "categories" => $categories]);
     }
 
     /**
@@ -116,10 +145,15 @@ class MedicineController extends Controller
         $data->category_id = $request->get("category_id");
         $data->supplier_id = $request->get("supplier_id");
         $data->supplier_id = $request->get("supplier_id");
-        $data->image = $request->file('image')->store('ImagesMedicine');
+
+        $file = $request->file('image');
+        $imgFolder='images';
+        $imgFile=time()."_".$file->getClientOriginalName();
+        $file->move($imgFolder, $imgFile);
+        $data->image=$imgFile;
 
         $data->save();
-        return redirect()->route("medicine.index")->with('status','data medicine baru berhasil tersimpan');
+        return redirect()->route("medicine.index")->with('status', 'data medicine baru berhasil tersimpan');
     }
 
     /**
@@ -171,24 +205,54 @@ class MedicineController extends Controller
      */
     public function destroy(Medicine $medicine)
     {
-        $this->authorize('delete-permission',$medicine);
+        $this->authorize('delete-permission', $medicine);
         try {
             $medicine->delete();
             return redirect()->route('medicine.index')->with('status', 'data berhasil dihapus');
         } catch (\PDOException $e) {
             $msg = "Data gagal di hapus";
-            return redirect()->route("medicine.index")->with('status',$msg);
+            return redirect()->route("medicine.index")->with('status', $msg);
         }
     }
 
-    public function getEditForm(Request $request){
+    public function getEditForm(Request $request)
+    {
         $id = $request->get('id');
         $data = Medicine::find($id);
         $categories = Category::all();
         $suppliers = Supplier::all();
         return response()->json(array(
-            'status'=>'oke',
-            'msg'=>view('medicine.getEditForm', compact('data'), compact("suppliers", 'categories'))->render()
+            'status' => 'oke',
+            'msg' => view('medicine.getEditForm', compact('data'), compact("suppliers", 'categories'))->render()
+        ), 200);
+    }
+
+    public function saveDataField(Request $request){
+        $id = $request->get('id');
+        $fname = $request->get('fname');
+        $value = $request->get('value');
+
+        $medicine = Medicine::find($id);
+        $medicine->$fname=$value;
+        $medicine->save();
+
+        return response()->json(array(
+            'status' => 'ok',
+            'msg' => 'medicine data updated'
         ),200);
+    }
+
+    public function changeImage(Request $request){
+        $id = $request->get('id');
+        $file = $request->file('image');
+        $imgFolder='images';
+        $imgFile=time()."_".$file->getClientOriginalName();
+        $file->move($imgFolder, $imgFile);
+
+        $medicine = Medicine::find($id);
+        $medicine->image=$imgFile;
+        $medicine->save();
+        $msg = "Data medicine di ubah";
+            return redirect()->route("medicine.index")->with('status', $msg);
     }
 }

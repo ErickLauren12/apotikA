@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="portlet-body form" style="display: block;">
-        <form role="form" method="POST" action="{{ url('supplier') }}">
+        <form role="form" method="POST" action="{{ url('supplier') }}" enctype="multipart/form-data" >
             @csrf
             <div class="form-body">
                 <div class="form-group">
@@ -39,6 +39,11 @@
                     </select>
                 </div>
 
+                <div class="form-group">
+                    <label>Logo</label>
+                    <input type="file" class="form-control" id="logo" name="logo">
+                </div>
+                
             <div class="form-actions">
                 <button type="submit" class="btn btn-info">Submit</button>
                 <button type="button" class="btn btn-default">Cancel</button>

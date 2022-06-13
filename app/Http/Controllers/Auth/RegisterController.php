@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -29,7 +30,24 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = "/supplier";
+    //protected $redirectTo = "/supplier";
+    public function redirectTo(){
+        $role = Auth::user()->sebagai;
+        switch($role){
+            case 'Pemilik':
+                return '/supplier';
+                break;
+            case 'Karyawan':
+                return '/medicines';
+                break;
+            case 'Member':
+                return '/checkout';
+                break;
+            default :
+                return '/home';
+                break;
+        }
+    }
 
     /**
      * Create a new controller instance.

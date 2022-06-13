@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+/*
 Route::get('/', function () {
     return view('welcome');
-});
+});*/
 
 Route::resource('/medicines', 'MedicineController');
 
@@ -39,11 +40,19 @@ Route::resource("supplier", "SupplierController");
 
 Route::resource('transaction', 'TransactionController');
 
+Route::get('/','MedicineController@front_index');
+Route::get('cart','MedicineController@cart');
+Route::get('add-to-cart/{id}','MedicineController@addToChart');
+
+Route::get('/checkout', 'TransactionController@form_submit_front')->middleware(['auth']);
+Route::get('/submit_checkout', 'TransactionController@submit_front')->name('submitcheckout')->middleware(['auth']);
+
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('transaction/show/{id}', 'TransactionController@show1');
     Route::post('transaction/showDataAjax/', 'TransactionController@showAjax')->name('transaction.showAjax');
     Route::get('transaction/showDataAjax2/{id}', 'TransactionController@showAjax2')->name('transaction.showAjax2');
 
@@ -52,6 +61,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/medicines/showInfo', 'MedicineController@showInfo')->name('medicines.showInfo');
     Route::post('/medicine/getEditForm', 'MedicineController@getEditForm')->name('medicine.getEditForm');
     Route::delete("medicine/{medicine}", "MedicineController@destroy");
+    Route::post('/medicine/savefield', 'MedicineController@saveDataField')->name('medicine.saveDataField');
+    Route::post('/medicine/changeImage', 'MedicineController@changeImage')->name('medicine.changeImage');
 
     Route::get("supplier/create", "SupplierController@create");
     Route::put("supplier/{supplier}/edit", "SupplierController@edit");
@@ -62,4 +73,6 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/supplier/deleteData', 'SupplierController@deleteData')->name('supplier.deleteData');
     Route::put("supplier/{supplier}", "SupplierController@update");
     Route::delete("supplier/{supplier}", "SupplierController@destroy");
+    Route::post('/supplier/savefield', 'SupplierController@saveDataField')->name('supplier.saveDataField');
+    Route::post('/supplier/changeLogo', 'SupplierController@changeLogo')->name('supplier.changeLogo');
 });

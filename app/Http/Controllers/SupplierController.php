@@ -25,6 +25,14 @@ class SupplierController extends Controller
     public function store(Request $request)
     {
         $data = new Supplier();
+
+        $file = $request->file('logo');
+        $imgFolder='images';
+        $imgFile=time()."_".$file->getClientOriginalName();
+        $file->move($imgFolder, $imgFile);
+        $data->logo=$imgFile;
+        
+
         $data->name = $request->get("name");
         $data->address = $request->get("address");
         $data->category_id = $request->get("id_category");
@@ -111,5 +119,33 @@ class SupplierController extends Controller
             ),200);
         }
 
+    }
+
+    public function saveDataField(Request $request){
+        $id = $request->get('id');
+        $fname = $request->get('fname');
+        $value = $request->get('value');
+
+        $supplier = Supplier::find($id);
+        $supplier->$fname=$value;
+        $supplier->save();
+
+        return response()->json(array(
+            'status' => 'ok',
+            'msg' => 'supplier data updated'
+        ),200);
+    }
+
+    public function changeLogo(Request $request){
+        $id = $request->get('id');
+        $file = $request->file('logo');
+        $imgFolder='images';
+        $imgFile=time()."_".$file->getClientOriginalName();
+        $file->move($imgFolder, $imgFile);
+
+        $supplier = Supplier::find($id);
+        $supplier->logo=$imgFile;
+        $supplier->save();
+        return redirect()->route("supplier.index")->with('status', 'upplier logo berhasil tersimpan');
     }
 }

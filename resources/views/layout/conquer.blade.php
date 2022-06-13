@@ -553,6 +553,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <script src="{{ asset('assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/plugins/jquery.blockui.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('assets/plugins/uniform/jquery.uniform.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('assets/plugins/jquery.editable.min.js') }}" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="{{ asset('assets/scripts/app.js') }}"></script>
@@ -563,6 +564,8 @@ jQuery(document).ready(function() {
    App.init();
 });
 </script>
+
+@yield('initialscript')
 <!-- END JAVASCRIPTS -->
 </body>
 <!-- END BODY -->

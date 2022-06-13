@@ -27,7 +27,7 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
         
         Gate::define('delete-permission','App\Policies\SupplierPolicy@delete');
-
+        Gate::define('checkmember','App\Policies\checkmember@checkmember');
         /*
         Gate::define('delete-permission', function($user){
             return ($user->sebagai == 'owner'
